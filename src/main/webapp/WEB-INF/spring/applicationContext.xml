@@ -20,7 +20,7 @@
 <property name="basename" value="messsage"></property>
 </bean>
 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-<property name="defaultLocale" value="fr"></property>
+<property name="defaultLocale" value="en"></property>
 </bean>
 
 <mvc:interceptors>

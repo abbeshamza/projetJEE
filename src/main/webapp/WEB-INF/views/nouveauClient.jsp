@@ -11,7 +11,7 @@
 <title>Bibilothèque | Ajouter nouveau client</title>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
 </head>
 <body>
 <a href="?Languages=en">English</a><a href="?Languages=fr">French</a>
@@ -26,6 +26,7 @@
 					<div class="large-12 columns">
 						<label>Nom et prénom <form:input path="username" type="text" />
 						</label>
+						<form:errors path="username"/>
 					</div>
 				</div>
 				<div class="row">

@@ -1,9 +1,13 @@
 package com.tn.isamm.entities;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -22,6 +26,8 @@ public class User {
 	private int nb_points;
 	private String role;
 	private String img;
+	@OneToMany(mappedBy="user")
+	private Collection<Event> events = new ArrayList<Event>();
 	public String getUsername() {
 		return username;
 	}
@@ -64,15 +70,17 @@ public class User {
 	public void setImg(String img) {
 		this.img = img;
 	}
+	public Collection<Event> getEvents() {
+		return events;
+	}
+	public void setEvents(Collection<Event> events) {
+		this.events = events;
+	}
 	public int getId() {
 		return id;
 	}
-	public User()
-	{
-		
-	}
-	public User(String username, String email, String password, String num_tel, int nb_points, String role,
-			String img) {
+	public User(String username, String email, String password, String num_tel, int nb_points, String role, String img,
+			Collection<Event> events) {
 		super();
 		this.username = username;
 		this.email = email;
@@ -81,7 +89,12 @@ public class User {
 		this.nb_points = nb_points;
 		this.role = role;
 		this.img = img;
+		this.events = events;
 	}
+	public User(){
+		
+	}
+	
 	
 	
 	

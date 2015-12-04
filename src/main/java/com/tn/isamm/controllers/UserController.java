@@ -62,12 +62,17 @@ public class UserController {
 			System.out.println("ici");
 			userService.enregistrerUser(user);
 			model.addObject("message", "Votre client a été bien enregistré!");
+			model.setViewName("redirect:/home");
 		}
 		else
+		{
+			System.out.println("client non valide");
+			model.setViewName("nouveauClient");
+		}
 			
-		  System.out.println("client non valide");
 		
-		model.setViewName("redirect:/home");
+		
+		
 		return model;
 	}
 	@InitBinder("user")
