@@ -61,6 +61,19 @@ private SessionFactory sessionFactory;
 		session.close();
 		return(c); 
 	}
+	public Categorie findByLabel(String label){
+		Session session=sessionFactory.openSession();
+		Transaction tx=session.beginTransaction();
+		Query q= session.createQuery("from Categorie c where c.label = :label");
+		q.setParameter("label", label);
+		Categorie c = null;
+		if (q.list().size() >0 )
+		 c= (Categorie)q.list().get(0);
+		tx.commit();
+		session.close();
+		return(c); 
+		
+	}
 
 	@Override
 	public List<Categorie> findByAll() {

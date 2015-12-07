@@ -1,0 +1,94 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<jsp:include page="../fragments/adminHeader.jsp"></jsp:include>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="  col-md-offset-5">
+			<h1><h1><spring:message code="admin.users.gestion"></spring:message></h1></h1>
+		</div>
+<br><br><br>
+	<div class="container">
+		
+		<div class=" form-group">
+		<table class="table table-responsive">
+			<form:form method="post" enctype= "multipart/form-data" class="form-horizontal" action="${pageContext.request.contextPath}/app/admin/user/edit" modelAttribute="user"> 
+				
+			
+				<tr class="form-group">
+				<td><label><spring:message code="user.form.new.label.email"/></label></td>
+				<td> <form:input path="email" class="form-control" type="email" value ="${user.email }" /></td>
+				<td><p class="bg-danger"><form:errors path="email"/></p></td>
+				</tr>
+					
+				<tr class="form-group">
+				<td><label><spring:message code="user.form.new.label.password"/> </label></td>
+				<td><form:input path="password" class="form-control" type="password" value ="${user.password }"   /></td>
+				<td><p class="bg-danger"><form:errors path="password"/></p></td>
+				</tr>
+					
+				<tr class="form-group">
+				<td><label><spring:message code="user.form.new.label.num_tel"/> </label></td>
+				<td><form:input path="num_tel" class="form-control" type="text" value ="${user.num_tel }"  /></td>
+				<td><p class="bg-danger"><form:errors path="num_tel"/></p></td>
+				</tr>
+			
+			    <tr class="form-group">
+				<td><label><spring:message code="admin.user.form.new.label.role"/> </label></td>
+				<td><select name="role">
+				<option>user</option>
+				<option>admin</option>
+				</select></td>
+				<td><p class="bg-danger"><form:errors path="role"/></p></td>
+				</tr>
+				
+				<tr class="form-group">
+				<td></td>
+				<td><input type="submit" value=<spring:message code="form.submit"/> class="btn btn-info">
+				<td/>
+				</tr>
+			</form:form>
+			</table>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<jsp:include page="../fragments/footer.jsp"></jsp:include>	

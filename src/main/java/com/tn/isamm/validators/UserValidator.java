@@ -17,7 +17,7 @@ public class UserValidator implements Validator {
 	@Override
 	public void validate(Object obj, Errors errors) {
 		User  u = (User) obj;
-		if (u.getUsername().length() < 14 )
+		if (u.getUsername().length() <4)
 		{
 			errors.rejectValue("username", "user.username", "too short");
 			

@@ -25,6 +25,7 @@ private SessionFactory sessionFactory;
 	public boolean create(User v) {
 		Session session=sessionFactory.openSession();
 		Transaction tx=session.beginTransaction();
+		v.setEtat(1);
 		session.save(v);
 		tx.commit();
 		session.close();
@@ -42,11 +43,11 @@ private SessionFactory sessionFactory;
 	}
 
 	@Override
-	public boolean delete(User c) {
+	public boolean delete(User m) {
 		Session session=sessionFactory.openSession();
 		Transaction tx=session.beginTransaction();
-		User c2=(User)session.get(User.class, c.getId());
-		session.delete(c2);
+		m.setEtat(0);
+		session.update(m);
 		tx.commit();
 		session.close();
 		return true;
@@ -61,12 +62,31 @@ private SessionFactory sessionFactory;
 		session.close();
 		return(c); 
 	}
+	public User findByUsernameAndPassword(String username,String password)
+	{
+		Session session=sessionFactory.openSession();
+		Transaction tx=session.beginTransaction();
+		Query q=session.createQuery("from User u where u.username = :username and u.password = :password and u.etat = :id");
+		q.setParameter("id", 1);
+		q.setParameter("username", username);
+		q.setParameter("password", password);
+		User c = new User();
+		if (!q.list().isEmpty())
+		 c=(User)q.list().get(0);
+		else
+			c =null;
+		tx.commit();
+		session.close();
+		return(c); 
+		
+	}
 
 	@Override
 	public List<User> findByAll() {
 		Session session=sessionFactory.openSession();
 		Transaction tx=session.beginTransaction();
-		Query q=session.createQuery("from User");
+		Query q=session.createQuery("from User u where u.etat = :id ");
+		q.setParameter("id", 1);
 		List<User> l=(List<User>)q.list();
 		tx.commit();
 		session.close();

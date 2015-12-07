@@ -8,13 +8,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class Categorie {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@NotBlank
+	@Size(min = 4 , max= 20)
 	private String label;
+	private int etat ;
+	public int getEtat() {
+		return etat;
+	}
+	public void setEtat(int etat) {
+		this.etat = etat;
+	}
 	@OneToMany(mappedBy="categorie")
 	private Collection<Event> event = new ArrayList<Event>();
 	@OneToMany(mappedBy="categorie")
@@ -40,11 +52,12 @@ public class Categorie {
 	public int getId() {
 		return id;
 	}
-	public Categorie(String label, Collection<Event> event, Collection<Cadeau> cadeau) {
+	public Categorie(String label, Collection<Event> event, Collection<Cadeau> cadeau, int et) {
 		super();
 		this.label = label;
 		this.event = event;
 		this.cadeau = cadeau;
+		this.etat=et;
 	}
 	public Categorie() {
 		

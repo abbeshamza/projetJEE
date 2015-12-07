@@ -11,5 +11,6 @@ public interface CategorieDAO {
 	public boolean delete(Categorie m);
 	public Categorie findById(int id);
 	public List<Categorie>findByAll();
+	public Categorie findByLabel(String label);
 
 }

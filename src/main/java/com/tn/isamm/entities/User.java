@@ -3,11 +3,13 @@ package com.tn.isamm.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -19,13 +21,26 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@Size(min = 4, max = 20)
+	@Column(unique=true)
 	private String username;
+	@NotBlank
+	@Column(unique=true)
 	private String email;
+	@NotBlank
+	@Size(min = 4, max = 20)
 	private String password;
+	@Size(min = 8, max = 20)
 	private String num_tel;
 	private int nb_points;
 	private String role;
 	private String img;
+	private int etat ;
+	public int getEtat() {
+		return etat;
+	}
+	public void setEtat(int etat) {
+		this.etat = etat;
+	}
 	@OneToMany(mappedBy="user")
 	private Collection<Event> events = new ArrayList<Event>();
 	public String getUsername() {
@@ -80,7 +95,7 @@ public class User {
 		return id;
 	}
 	public User(String username, String email, String password, String num_tel, int nb_points, String role, String img,
-			Collection<Event> events) {
+			Collection<Event> events,int it) {
 		super();
 		this.username = username;
 		this.email = email;
@@ -90,6 +105,7 @@ public class User {
 		this.role = role;
 		this.img = img;
 		this.events = events;
+		this.etat=it;
 	}
 	public User(){
 		

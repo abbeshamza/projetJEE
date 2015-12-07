@@ -13,20 +13,37 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ManyToAny;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Event {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@NotBlank
+	@Size(min=4 , max = 20)
 	private String label;
+	@NotBlank
+	@Size(min=20 , max = 255)
 	private String description;
 	@Temporal(TemporalType.DATE)
 	private Date date ;
+	
 	private int nbr_participant;
+	@NotBlank
+	@Size(min=4 , max = 20)
 	private String lieu;
+	private int etat ;
+	public int getEtat() {
+		return etat;
+	}
+	public void setEtat(int etat) {
+		this.etat = etat;
+	}
+	
 	private int prix;
 	private String img;
 	@ManyToOne
@@ -101,7 +118,7 @@ public class Event {
 		return id;
 	}
 	public Event(String label, String description, Date date, int nbr_participant, String lieu, int prix, String img,
-			User user, Categorie categorie, Collection<Reservation> events) {
+			User user, Categorie categorie, Collection<Reservation> events,int it) {
 		
 		this.label = label;
 		this.description = description;
@@ -113,6 +130,7 @@ public class Event {
 		this.user = user;
 		this.categorie = categorie;
 		this.events = events;
+		this.etat=it;
 	}
 	public Event()
 	{
